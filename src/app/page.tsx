@@ -79,7 +79,7 @@ export default function Home() {
         </div>
 
         <div className="grid md:grid-cols-2 gap-8">
-          
+
           <ProjectCard
             title="Real Estate Data Analytics Pipeline"
             description="Built an end-to-end analytics pipeline for MLS housing data, including data cleaning, feature engineering, geospatial enrichment, outlier detection, and interactive Tableau dashboards."
@@ -88,7 +88,9 @@ export default function Home() {
               "Pandas",
               "GeoPandas",
               "Tableau",
-              "Data Analytics",
+              "Data Cleaning",
+              "Feature Engineering",
+              "Data Visualization",
             ]}
             href="/projects/idx-analytics"
             image="/images/idx-project.png"
@@ -102,7 +104,8 @@ export default function Home() {
               "NumPy",
               "Machine Learning",
               "Hopfield Networks",
-              "RBM",
+              "Restricted Boltzmann Machines",
+              "Energy-Based Models",
             ]}
             href="/projects/machine-learning"
             image="/images/ml-corrupt.png"
@@ -115,6 +118,8 @@ export default function Home() {
               "Python",
               "PyTorch",
               "Computer Vision",
+              "Deep Learning",
+              "CNN",
             ]}
             href="/projects/galaxy-zoo"
             image="/images/galaxy-project.png"
