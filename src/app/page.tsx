@@ -1,69 +1,129 @@
-import Image from "next/image";
+import Link from "next/link";
+import ProjectCard from "./components/ProjectCard";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <main className="max-w-5xl mx-auto px-6">
+
+      <section className="mb-10 pt-6">
+
+        <p className="mb-1 pl-1 text-sm uppercase tracking-[0.25em] text-gray-500">
+          Portfolio
+        </p>
+
+        <h1 className="max-w-3xl text-5xl font-bold leading-tight md:text-6xl">
+          Michael Chen
+        </h1>
+
+        <p className="mt-1 text-2xl font-medium text-gray-700">
+          Machine Learning • Data Science • Computational Physics
+        </p>
+
+        <p className="mt-1 text-sm font-medium uppercase tracking-[0.12em] text-gray-500">
+          Current M.S. AI/ML, UW Seattle 2028 • B.S. Physics, UIUC 2026
+        </p>
+
+        <div className="mt-5 max-w-2xl text-lg leading-8 text-gray-600">
+          <p>
+            I build machine learning and data-driven systems with interests in
+            artificial intelligence, scientific computing, optimization, and analytics.
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
+
+        <div className="mt-8 flex flex-wrap gap-4">
+
           <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+            href="YOUR_GITHUB_URL"
             target="_blank"
-            rel="noopener noreferrer"
+            className="rounded-lg bg-black px-5 py-3 font-medium text-white transition hover:bg-gray-800"
           >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
+            GitHub
           </a>
+
           <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+            href="YOUR_LINKEDIN_URL"
             target="_blank"
-            rel="noopener noreferrer"
+            className="rounded-lg bg-black px-5 py-3 font-medium text-white transition hover:bg-gray-800"
           >
-            Documentation
+            LinkedIn
           </a>
+
+          <a
+            href="/resume.pdf"
+            target="_blank"
+            className="rounded-lg bg-black px-5 py-3 font-medium text-white transition hover:bg-gray-800"
+          >
+            Resume
+          </a>
+
         </div>
-      </main>
-    </div>
+
+      </section>
+
+
+      <section id="projects">
+
+        <div className="mb-10">
+          <p className="text-sm uppercase tracking-[0.2em] text-gray-500">
+            Selected Work
+          </p>
+
+          <h2 className="mt-2 text-3xl font-bold">
+            Featured Projects
+          </h2>
+
+          <p className="mt-3 max-w-2xl text-gray-600">
+            A selection of machine learning, scientific computing,
+            and data analytics projects.
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-8">
+          
+          <ProjectCard
+            title="Real Estate Data Analytics Pipeline"
+            description="Built an end-to-end analytics pipeline for MLS housing data, including data cleaning, feature engineering, geospatial enrichment, outlier detection, and interactive Tableau dashboards."
+            technologies={[
+              "Python",
+              "Pandas",
+              "GeoPandas",
+              "Tableau",
+              "Data Analytics",
+            ]}
+            href="/projects/idx-analytics"
+            image="/images/idx-project.png"
+          />
+
+          <ProjectCard
+            title="Machine Learning Neural Network Exploration"
+            description="Developed Hopfiel Networks and Restricted Boltzmann Machines without ML libraries."
+            technologies={[
+              "Python",
+              "NumPy",
+              "Machine Learning",
+              "Hopfield Networks",
+              "RBM",
+            ]}
+            href="/projects/machine-learning"
+            image="/images/ml-corrupt.png"
+          />
+
+          <ProjectCard
+            title="Galaxy Classification"
+            description="Deep learning for galaxy morphology classification using astronomical images."
+            technologies={[
+              "Python",
+              "PyTorch",
+              "Computer Vision",
+            ]}
+            href="/projects/galaxy-zoo"
+            image="/images/galaxy-project.png"
+          />
+
+        </div>
+
+      </section>
+
+    </main>
   );
 }
