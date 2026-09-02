@@ -33,7 +33,7 @@ export default function Home() {
         <div className="mt-8 flex flex-wrap gap-4">
 
           <a
-            href="YOUR_GITHUB_URL"
+            href="https://github.com/Migdf"
             target="_blank"
             className="rounded-lg bg-black px-5 py-3 font-medium text-white transition hover:bg-gray-800"
           >
@@ -41,7 +41,7 @@ export default function Home() {
           </a>
 
           <a
-            href="YOUR_LINKEDIN_URL"
+            href="https://www.linkedin.com/in/michaeldchen/"
             target="_blank"
             className="rounded-lg bg-black px-5 py-3 font-medium text-white transition hover:bg-gray-800"
           >
