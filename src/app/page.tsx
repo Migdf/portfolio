@@ -3,7 +3,7 @@ import ProjectCard from "./components/ProjectCard";
 
 export default function Home() {
   return (
-    <main className="max-w-5xl mx-auto px-6">
+    <main className="mx-auto max-w-5xl px-6 text-gray-100">
 
       <section className="mb-10 pt-6">
 
@@ -11,11 +11,11 @@ export default function Home() {
           Portfolio
         </p>
 
-        <h1 className="max-w-3xl text-5xl font-bold leading-tight md:text-6xl">
+        <h1 className="max-w-3xl text-5xl font-bold leading-tight text-white md:text-6xl">
           Michael Chen
         </h1>
 
-        <p className="mt-1 text-2xl font-medium text-gray-700">
+        <p className="mt-1 text-2xl font-medium text-gray-300">
           Machine Learning • Data Science • Computational Physics
         </p>
 
@@ -23,7 +23,7 @@ export default function Home() {
           Current M.S. AI/ML, UW Seattle 2028 • B.S. Physics, UIUC 2026
         </p>
 
-        <div className="mt-5 max-w-2xl text-lg leading-8 text-gray-600">
+        <div className="mt-5 max-w-2xl text-lg leading-8 text-gray-300">
           <p>
             I build machine learning and data-driven systems with interests in
             artificial intelligence, scientific computing, optimization, and analytics.
@@ -35,7 +35,8 @@ export default function Home() {
           <a
             href="https://github.com/Migdf"
             target="_blank"
-            className="rounded-lg bg-black px-5 py-3 font-medium text-white transition hover:bg-gray-800"
+            rel="noopener noreferrer"
+            className="rounded-lg bg-gray-100 px-5 py-3 font-medium text-gray-950 transition hover:bg-white"
           >
             GitHub
           </a>
@@ -43,7 +44,8 @@ export default function Home() {
           <a
             href="https://www.linkedin.com/in/michaeldchen/"
             target="_blank"
-            className="rounded-lg bg-black px-5 py-3 font-medium text-white transition hover:bg-gray-800"
+            rel="noopener noreferrer"
+            className="rounded-lg bg-gray-100 px-5 py-3 font-medium text-gray-950 transition hover:bg-white"
           >
             LinkedIn
           </a>
@@ -51,7 +53,8 @@ export default function Home() {
           <a
             href="/resume.pdf"
             target="_blank"
-            className="rounded-lg bg-black px-5 py-3 font-medium text-white transition hover:bg-gray-800"
+            rel="noopener noreferrer"
+            className="rounded-lg bg-gray-100 px-5 py-3 font-medium text-gray-950 transition hover:bg-white"
           >
             Resume
           </a>
@@ -61,24 +64,27 @@ export default function Home() {
       </section>
 
 
-      <section id="projects">
+      <section id="projects" className="scroll-mt-18">
 
         <div className="mb-10">
+
           <p className="text-sm uppercase tracking-[0.2em] text-gray-500">
             Selected Work
           </p>
 
-          <h2 className="mt-2 text-3xl font-bold">
+          <h2 className="mt-2 text-3xl font-bold text-white">
             Featured Projects
           </h2>
 
-          <p className="mt-3 max-w-2xl text-gray-600">
+          <p className="mt-3 max-w-2xl text-gray-400">
             A selection of machine learning, scientific computing,
             and data analytics projects.
           </p>
+
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8">
+
+        <div className="grid gap-8 md:grid-cols-2">
 
           <ProjectCard
             title="Real Estate Data Analytics Pipeline"
@@ -98,7 +104,7 @@ export default function Home() {
 
           <ProjectCard
             title="Machine Learning Neural Network Exploration"
-            description="Developed Hopfiel Networks and Restricted Boltzmann Machines without ML libraries."
+            description="Developed Hopfield Networks and Restricted Boltzmann Machines from scratch without machine learning libraries."
             technologies={[
               "Python",
               "NumPy",

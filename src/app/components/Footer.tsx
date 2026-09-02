@@ -1,8 +1,8 @@
 export default function Footer() {
   return (
-    <footer className="border-t">
+    <footer className="border-t border-gray-800">
 
-      <div className="mx-auto flex max-w-5xl flex-col gap-4 px-6 py-5 text-sm text-gray-500 md:flex-row md:items-center md:justify-between">
+      <div className="mx-auto flex max-w-5xl flex-col gap-4 px-6 py-5 text-sm text-gray-400 md:flex-row md:items-center md:justify-between">
 
         <p>
           © 2026 Michael Chen
@@ -11,17 +11,19 @@ export default function Footer() {
         <div className="flex gap-5">
 
           <a
-            href="YOUR_GITHUB_URL"
+            href="https://github.com/Migdf"
             target="_blank"
-            className="hover:text-black"
+            rel="noopener noreferrer"
+            className="transition hover:text-white"
           >
             GitHub
           </a>
 
           <a
-            href="YOUR_LINKEDIN_URL"
+            href="https://www.linkedin.com/in/michaeldchen/"
             target="_blank"
-            className="hover:text-black"
+            rel="noopener noreferrer"
+            className="transition hover:text-white"
           >
             LinkedIn
           </a>
@@ -29,7 +31,8 @@ export default function Footer() {
           <a
             href="/resume.pdf"
             target="_blank"
-            className="hover:text-black"
+            rel="noopener noreferrer"
+            className="transition hover:text-white"
           >
             Resume
           </a>

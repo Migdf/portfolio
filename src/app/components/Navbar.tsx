@@ -2,29 +2,28 @@ import Link from "next/link";
 
 export default function Navbar() {
   return (
-    <nav className="sticky top-0 z-50 border-b bg-white/90 backdrop-blur">
-
+    <nav className="sticky top-0 z-50 border-b border-gray-800 bg-gray-950/90 backdrop-blur">
       <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
 
         <Link
           href="/"
-          className="text-lg font-bold"
+          className="text-lg font-bold text-white"
         >
           Michael Chen
         </Link>
 
-        <div className="flex items-center gap-6 text-sm font-medium">
+        <div className="flex items-center gap-6 text-sm font-medium text-gray-300">
 
-          <Link
+          <a
             href="/#projects"
-            className="transition hover:text-gray-500"
+            className="transition hover:text-white"
           >
             Projects
-          </Link>
+          </a>
 
           <Link
             href="/experience"
-            className="transition hover:text-gray-500"
+            className="transition hover:text-white"
           >
             Experience
           </Link>
@@ -32,15 +31,14 @@ export default function Navbar() {
           <a
             href="/resume.pdf"
             target="_blank"
-            className="transition hover:text-gray-500"
+            rel="noopener noreferrer"
+            className="transition hover:text-white"
           >
             Resume
           </a>
 
         </div>
-
       </div>
-
     </nav>
   );
 }

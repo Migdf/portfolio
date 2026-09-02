@@ -57,11 +57,11 @@ export default function ProjectPage({
     useState<ProjectImage | null>(null);
 
   return (
-    <main className="mx-auto max-w-5xl px-6 py-8">
+    <main className="mx-auto max-w-5xl px-6 py-8 text-gray-100">
 
       <Link
         href="/#projects"
-        className="mb-10 inline-block text-sm text-gray-500 transition hover:text-black"
+        className="mb-10 inline-block text-sm text-gray-400 transition hover:text-white"
       >
         ← Back to Projects
       </Link>
@@ -74,11 +74,11 @@ export default function ProjectPage({
           Project
         </p>
 
-        <h1 className="max-w-4xl text-4xl font-bold leading-tight md:text-5xl">
+        <h1 className="max-w-4xl text-4xl font-bold leading-tight text-white md:text-5xl">
           {title}
         </h1>
 
-        <p className="mt-5 max-w-3xl text-xl leading-8 text-gray-600">
+        <p className="mt-5 max-w-3xl text-xl leading-8 text-gray-300">
           {subtitle}
         </p>
 
@@ -86,7 +86,7 @@ export default function ProjectPage({
           {technologies.map((technology) => (
             <span
               key={technology}
-              className="rounded-full bg-gray-100 px-3 py-1 text-sm text-gray-700"
+              className="rounded-full bg-gray-800 px-3 py-1 text-sm text-gray-200"
             >
               {technology}
             </span>
@@ -96,13 +96,13 @@ export default function ProjectPage({
 
         {links.length > 0 && (
           <div className="mt-8 flex flex-wrap gap-4">
-            {links.map((link, index) => (
+            {links.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-lg bg-black px-5 py-3 font-medium text-white transition hover:bg-gray-800"
+                className="rounded-lg bg-gray-100 px-5 py-3 font-medium text-gray-950 transition hover:bg-white"
               >
                 {link.label}
               </a>
@@ -117,7 +117,7 @@ export default function ProjectPage({
       <section className="mb-8">
 
         {video ? (
-          <div className="aspect-video overflow-hidden rounded-2xl border">
+          <div className="aspect-video overflow-hidden rounded-2xl border border-gray-800 bg-gray-900">
             <iframe
               src={video}
               className="h-full w-full"
@@ -136,7 +136,7 @@ export default function ProjectPage({
             }
             className="block w-full cursor-zoom-in"
           >
-            <div className="relative aspect-video overflow-hidden rounded-2xl border bg-white">
+            <div className="relative aspect-video overflow-hidden rounded-2xl border border-gray-800 bg-gray-900">
 
               <Image
                 src={image}
@@ -160,10 +160,10 @@ export default function ProjectPage({
           {sections.map((section) => (
             <section
               key={section.title}
-              className="mb-14 border-t pt-10"
+              className="mb-14 border-t border-gray-800 pt-10"
             >
 
-              <h2 className="text-2xl font-bold tracking-tight">
+              <h2 className="text-2xl font-bold tracking-tight text-white">
                 {section.title}
               </h2>
 
@@ -175,7 +175,7 @@ export default function ProjectPage({
                   return (
                     <p
                       key={index}
-                      className="mt-4 whitespace-pre-line text-lg leading-8 text-gray-700"
+                      className="mt-4 whitespace-pre-line text-lg leading-8 text-gray-300"
                     >
                       {block.content}
                     </p>
@@ -193,7 +193,7 @@ export default function ProjectPage({
                         onClick={() => setSelectedImage(block.image)}
                         className="block w-full cursor-zoom-in"
                       >
-                        <div className="relative aspect-video overflow-hidden rounded-xl border bg-white">
+                        <div className="relative aspect-video overflow-hidden rounded-xl border border-gray-800 bg-gray-900">
 
                           <Image
                             src={block.image.src}
@@ -222,7 +222,7 @@ export default function ProjectPage({
                   return (
                     <pre
                       key={index}
-                      className="mt-6 overflow-x-auto rounded-xl bg-gray-950 p-5 text-sm leading-6 text-gray-100"
+                      className="mt-6 overflow-x-auto rounded-xl border border-gray-800 bg-black p-5 text-sm leading-6 text-gray-200"
                     >
                       <code>{block.code}</code>
                     </pre>
@@ -253,7 +253,7 @@ export default function ProjectPage({
               {technologies.map((technology) => (
                 <span
                   key={technology}
-                  className="rounded-full bg-gray-100 px-3 py-1 text-sm text-gray-700"
+                  className="rounded-full bg-gray-800 px-3 py-1 text-sm text-gray-200"
                 >
                   {technology}
                 </span>
@@ -271,7 +271,7 @@ export default function ProjectPage({
       {/* Image lightbox */}
       {selectedImage && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-6"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-6"
           onClick={() => setSelectedImage(null)}
         >
 
