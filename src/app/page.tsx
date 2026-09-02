@@ -7,7 +7,7 @@ export default function Home() {
 
       <section className="mb-10 pt-6">
 
-        <p className="mb-1 pl-1 text-sm uppercase tracking-[0.25em] text-gray-500">
+        <p className="mb-1 pl-1 text-sm uppercase tracking-[0.25em] text-gray-400">
           Portfolio
         </p>
 
@@ -19,7 +19,7 @@ export default function Home() {
           Machine Learning • Data Science • Computational Physics
         </p>
 
-        <p className="mt-1 text-sm font-medium uppercase tracking-[0.12em] text-gray-500">
+        <p className="mt-1 text-sm font-medium uppercase tracking-[0.12em] text-gray-400">
           Current M.S. AI/ML, UW Seattle 2028 • B.S. Physics, UIUC 2026
         </p>
 
@@ -68,7 +68,7 @@ export default function Home() {
 
         <div className="mb-10">
 
-          <p className="text-sm uppercase tracking-[0.2em] text-gray-500">
+          <p className="text-sm uppercase tracking-[0.2em] text-gray-400">
             Selected Work
           </p>
 

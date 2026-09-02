@@ -70,7 +70,7 @@ export default function ProjectPage({
       {/* Hero */}
       <section className="mb-10">
 
-        <p className="mb-3 text-sm uppercase tracking-[0.2em] text-gray-500">
+        <p className="mb-3 text-sm uppercase tracking-[0.2em] text-gray-400">
           Project
         </p>
 
@@ -207,7 +207,7 @@ export default function ProjectPage({
 
 
                       {block.image.caption && (
-                        <figcaption className="mt-2 text-center text-sm text-gray-500">
+                        <figcaption className="mt-2 text-center text-sm text-gray-400">
                           {block.image.caption}
                         </figcaption>
                       )}
@@ -244,7 +244,7 @@ export default function ProjectPage({
 
           <div className="sticky top-28">
 
-            <p className="text-sm font-bold uppercase tracking-wider text-gray-500">
+            <p className="text-sm font-bold uppercase tracking-wider text-gray-400">
               Technologies
             </p>
 

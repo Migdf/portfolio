@@ -45,20 +45,20 @@ export default function ExperienceItem({
           )}
         </div>
 
-        <p className="text-sm text-gray-500">
+        <p className="text-sm text-gray-400">
           {date}
         </p>
 
       </div>
 
-      <p className="mt-4 whitespace-pre-line leading-7 text-gray-300">
+      <p className="mt-4 whitespace-pre-line leading-7 text-gray-400">
         {description}
       </p>
 
       {projectHref && (
         <Link
           href={projectHref}
-          className="mt-4 inline-block font-medium text-gray-300 underline underline-offset-4 transition hover:text-white"
+          className="mt-4 inline-block font-medium text-gray-400 underline underline-offset-4 transition hover:text-white"
         >
           {projectLabel}
         </Link>

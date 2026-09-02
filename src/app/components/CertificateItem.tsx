@@ -28,7 +28,7 @@ export default function CertificateItem({
           </p>
         </div>
 
-        <p className="text-sm text-gray-500">
+        <p className="text-sm text-gray-400">
           {date}
         </p>
 
