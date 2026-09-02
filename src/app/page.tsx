@@ -7,7 +7,7 @@ export default function Home() {
 
       <section className="mb-10 pt-6">
 
-        <p className="mb-1 pl-1 text-sm uppercase tracking-[0.25em] text-gray-400">
+        <p className="mb-1 pl-1 text-sm uppercase tracking-[0.25em] text-gray-300">
           Portfolio
         </p>
 
@@ -19,7 +19,7 @@ export default function Home() {
           Machine Learning • Data Science • Computational Physics
         </p>
 
-        <p className="mt-1 text-sm font-medium uppercase tracking-[0.12em] text-gray-400">
+        <p className="mt-1 text-sm font-medium uppercase tracking-[0.12em] text-[#B7BCC5]">
           Current M.S. AI/ML, UW Seattle 2028 • B.S. Physics, UIUC 2026
         </p>
 
@@ -68,7 +68,7 @@ export default function Home() {
 
         <div className="mb-10">
 
-          <p className="text-sm uppercase tracking-[0.2em] text-gray-400">
+          <p className="text-sm uppercase tracking-[0.2em] text-gray-300">
             Selected Work
           </p>
 
@@ -76,7 +76,7 @@ export default function Home() {
             Featured Projects
           </h2>
 
-          <p className="mt-3 max-w-2xl text-gray-400">
+          <p className="mt-3 max-w-2xl text-[#B7BCC5]">
             A selection of machine learning, scientific computing,
             and data analytics projects.
           </p>

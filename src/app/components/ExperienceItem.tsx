@@ -39,7 +39,7 @@ export default function ExperienceItem({
               {company}
             </a>
           ) : (
-            <p className="mt-1 text-gray-400">
+            <p className="mt-1 text-[#B7BCC5]">
               {company}
             </p>
           )}
@@ -51,14 +51,14 @@ export default function ExperienceItem({
 
       </div>
 
-      <p className="mt-4 whitespace-pre-line leading-7 text-gray-400">
+      <p className="mt-4 whitespace-pre-line leading-7 text-gray-200">
         {description}
       </p>
 
       {projectHref && (
         <Link
           href={projectHref}
-          className="mt-4 inline-block font-medium text-gray-400 underline underline-offset-4 transition hover:text-white"
+          className="mt-4 inline-block font-medium text-gray-300 underline underline-offset-4 transition hover:text-white"
         >
           {projectLabel}
         </Link>

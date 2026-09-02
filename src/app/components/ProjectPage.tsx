@@ -175,7 +175,7 @@ export default function ProjectPage({
                   return (
                     <p
                       key={index}
-                      className="mt-4 whitespace-pre-line text-lg leading-8 text-gray-300"
+                      className="mt-4 whitespace-pre-line text-lg leading-8 text-gray-200"
                     >
                       {block.content}
                     </p>

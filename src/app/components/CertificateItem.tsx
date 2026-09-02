@@ -23,7 +23,7 @@ export default function CertificateItem({
             {title}
           </h2>
 
-          <p className="mt-1 text-gray-400">
+          <p className="mt-1 text-[#B7BCC5]">
             {issuer}
           </p>
         </div>
