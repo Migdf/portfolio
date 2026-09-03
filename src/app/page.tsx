@@ -5,11 +5,7 @@ export default function Home() {
   return (
     <main className="mx-auto max-w-5xl px-6 text-gray-100">
 
-      <section className="mb-10 pt-6">
-
-        <p className="mb-1 pl-1 text-sm uppercase tracking-[0.25em] text-gray-300">
-          Portfolio
-        </p>
+      <section className="mb-10 pt-4">
 
         <h1 className="max-w-3xl text-5xl font-bold leading-tight text-white md:text-6xl">
           Michael Chen

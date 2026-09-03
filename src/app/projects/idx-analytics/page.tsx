@@ -19,11 +19,11 @@ export default function DataAnalyticsPage() {
 
       links={[
         {
-          label: "View GitHub",
+          label: "View Source Code",
           href: "https://github.com/Migdf/IDX-Exchange-Internship",
         },
         {
-          label: "Market Dashboard",
+          label: "View Dashboard",
           href: "https://public.tableau.com/app/profile/michael.chen7022/viz/MarketAnalysisFull/MarketAnalysis",
         },
       ]}

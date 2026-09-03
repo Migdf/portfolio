@@ -18,7 +18,7 @@ export default function MachineLearningPage() {
 
       links={[
         {
-          label: "View GitHub",
+          label: "View Source Code",
           href: "https://github.com/Migdf/PHYS-446/blob/main/Machine%20Learning/Machine%20Learning.ipynb",
         },
       ]}

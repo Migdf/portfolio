@@ -4,7 +4,7 @@ export default function GalaxyZooPage() {
   return (
     <ProjectPage
       title="Galaxy Classification with Deep Learning"
-      subtitle="Using convolutional neural networks to classify galaxy morphology from astronomical image data. This is a Machine Learning for Physics (PHYS 450) class guided project by Professor Neubauer at UIUC."
+      subtitle="Using convolutional neural networks to classify galaxy morphology from astronomical image data."
       image="/images/galaxy-project.png"
 
       technologies={[
@@ -17,7 +17,7 @@ export default function GalaxyZooPage() {
 
       links={[
         {
-          label: "View GitHub",
+          label: "View Source Code",
           href: "https://github.com/Migdf/PHYS-450/blob/main/Project_01_GalaxyZoo.ipynb",
         },
       ]}
