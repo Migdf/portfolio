@@ -52,4 +52,18 @@ export const projects: Project[] = [
     href: "/projects/galaxy-zoo",
     image: "/images/galaxy-project.png",
   },
+  {
+  title: "Fluid Dynamics Simulation",
+  description:
+    "Built a lattice Boltzmann fluid simulation with collision, streaming, boundary conditions, and obstacle interactions, visualizing the resulting flow field over time.",
+  technologies: [
+    "Python",
+    "NumPy",
+    "Matplotlib",
+    "Scientific Computing",
+    "Fluid Dynamics",
+  ],
+  href: "/projects/fluid-simulation",
+  image: "/images/fluid-simulation.png",
+  },
 ];

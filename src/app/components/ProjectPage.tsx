@@ -7,6 +7,8 @@ import {
 } from "react";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import katex from "katex";
+import "katex/dist/katex.min.css";
 import TechnologyBadge from "./TechnologyBadge";
 
 type ProjectLink = {
@@ -32,6 +34,11 @@ type ProjectBlock =
   | {
       type: "code";
       code: string;
+    }
+  | {
+      type: "equation";
+      equation: string;
+      caption?: string;
     };
 
 type ProjectSection = {
@@ -72,7 +79,6 @@ export default function ProjectPage({
   const tocRef =
     useRef<HTMLDivElement | null>(null);
 
-
   const getSectionId = (
     title: string
   ): string =>
@@ -82,14 +88,30 @@ export default function ProjectPage({
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/^-|-$/g, "");
 
+  const renderEquation = (
+    equation: string
+  ): string => {
+    return katex.renderToString(
+      equation,
+      {
+        displayMode: true,
+        throwOnError: false,
+        strict: false,
+      }
+    );
+  };
 
-  /* Always start each project page at the top */
+  const isLocalVideo =
+    video &&
+    /\.(mp4|webm|ogg)$/i.test(video);
+
   useEffect(() => {
     const previousScrollBehavior =
-      document.documentElement.style.scrollBehavior;
+      document.documentElement.style
+        .scrollBehavior;
 
-    document.documentElement.style.scrollBehavior =
-      "auto";
+    document.documentElement.style
+      .scrollBehavior = "auto";
 
     window.scrollTo({
       top: 0,
@@ -97,12 +119,11 @@ export default function ProjectPage({
       behavior: "instant",
     });
 
-    document.documentElement.style.scrollBehavior =
-      previousScrollBehavior;
+    document.documentElement.style
+      .scrollBehavior =
+        previousScrollBehavior;
   }, [pathname]);
 
-
-  /* Track active section */
   useEffect(() => {
     if (sections.length === 0) return;
 
@@ -113,64 +134,112 @@ export default function ProjectPage({
         )
       )
       .filter(
-        (element): element is HTMLElement =>
+        (
+          element
+        ): element is HTMLElement =>
           element !== null
       );
 
-    const observer =
-      new IntersectionObserver(
-        (entries) => {
-          const visibleEntries = entries
-            .filter(
-              (entry) =>
-                entry.isIntersecting
-            )
-            .sort(
-              (a, b) =>
-                Math.abs(
-                  a.boundingClientRect.top
-                ) -
-                Math.abs(
-                  b.boundingClientRect.top
-                )
-            );
+    if (
+      sectionElements.length === 0
+    ) {
+      return;
+    }
+
+    const lastSectionId =
+      sectionElements[
+        sectionElements.length - 1
+      ].id;
+
+    const updateActiveSection =
+      (): void => {
+        const isAtBottom =
+          window.innerHeight +
+            window.scrollY >=
+          document.documentElement
+            .scrollHeight -
+            10;
+
+        if (isAtBottom) {
+          setActiveSection(
+            lastSectionId
+          );
+
+          return;
+        }
+
+        const activationPoint =
+          window.innerHeight * 0.3;
+
+        let currentSection =
+          sectionElements[0].id;
+
+        for (
+          const section
+          of sectionElements
+        ) {
+          const rect =
+            section.getBoundingClientRect();
 
           if (
-            visibleEntries.length > 0
+            rect.top <=
+            activationPoint
           ) {
-            setActiveSection(
-              visibleEntries[0].target.id
-            );
+            currentSection =
+              section.id;
+          } else {
+            break;
           }
-        },
-        {
-          rootMargin:
-            "-25% 0px -60% 0px",
-          threshold: 0,
         }
-      );
 
-    sectionElements.forEach(
-      (section) => {
-        observer.observe(section);
+        setActiveSection(
+          currentSection
+        );
+      };
+
+    let ticking = false;
+
+    const handleScroll =
+      (): void => {
+        if (ticking) return;
+
+        ticking = true;
+
+        requestAnimationFrame(() => {
+          updateActiveSection();
+
+          ticking = false;
+        });
+      };
+
+    updateActiveSection();
+
+    window.addEventListener(
+      "scroll",
+      handleScroll,
+      {
+        passive: true,
       }
     );
 
-    if (
-      sectionElements.length > 0
-    ) {
-      setActiveSection(
-        sectionElements[0].id
-      );
-    }
+    window.addEventListener(
+      "resize",
+      updateActiveSection
+    );
 
     return () => {
-      observer.disconnect();
+      window.removeEventListener(
+        "scroll",
+        handleScroll
+      );
+
+      window.removeEventListener(
+        "resize",
+        updateActiveSection
+      );
     };
   }, [sections]);
 
-
-  /* Keep TOC vertically centered once reached */
   useEffect(() => {
     const updateTocPosition =
       (): void => {
@@ -224,11 +293,9 @@ export default function ProjectPage({
     };
   }, [sections]);
 
-
   return (
     <main className="mx-auto max-w-7xl px-6 pt-0 pb-8 text-gray-100">
 
-      {/* Hero */}
       <section className="mb-8">
 
         <h1 className="max-w-4xl text-4xl font-bold leading-tight text-white md:text-5xl">
@@ -239,10 +306,7 @@ export default function ProjectPage({
           {subtitle}
         </p>
 
-
-        {/* Technology badges */}
         <div className="mt-6 flex flex-wrap items-center gap-2">
-
           {technologies.map(
             (technology) => (
               <TechnologyBadge
@@ -251,11 +315,8 @@ export default function ProjectPage({
               />
             )
           )}
-
         </div>
 
-
-        {/* Project links */}
         {links.length > 0 && (
           <div className="mt-8 flex flex-wrap items-center gap-3">
 
@@ -263,11 +324,9 @@ export default function ProjectPage({
               const normalizedLabel =
                 link.label.toLowerCase();
 
-              let badgeUrl: string | null =
-                null;
+              let badgeUrl:
+                string | null = null;
 
-
-              /* GitHub / Source Code */
               if (
                 normalizedLabel.includes(
                   "source"
@@ -280,8 +339,6 @@ export default function ProjectPage({
                   "https://img.shields.io/badge/View_Source_Code-181717?logo=github&logoColor=white";
               }
 
-
-              /* Tableau / Dashboard */
               else if (
                 normalizedLabel.includes(
                   "dashboard"
@@ -294,6 +351,17 @@ export default function ProjectPage({
                   "https://custom-icon-badges.demolab.com/badge/View_Dashboard-0176D3?logo=tableau&logoColor=fff";
               }
 
+              else if (
+                normalizedLabel.includes(
+                  "colab"
+                ) ||
+                normalizedLabel.includes(
+                  "notebook"
+                )
+              ) {
+                badgeUrl =
+                  "https://img.shields.io/badge/Open_Colab-F9AB00?logo=googlecolab&logoColor=white";
+              }
 
               return (
                 <a
@@ -303,7 +371,6 @@ export default function ProjectPage({
                   rel="noopener noreferrer"
                   className="inline-block transition hover:scale-105"
                 >
-
                   {badgeUrl ? (
                     <img
                       src={badgeUrl}
@@ -312,11 +379,10 @@ export default function ProjectPage({
                       className="h-8"
                     />
                   ) : (
-                    <span className="inline-block rounded-lg bg-gray-100 px-5 py-2 font-medium text-gray-950 transition hover:bg-white">
+                    <span className="inline-block rounded-lg bg-[#222222] px-5 py-2 font-medium text-white transition hover:bg-[#2C2C2C]">
                       {link.label}
                     </span>
                   )}
-
                 </a>
               );
             })}
@@ -326,22 +392,47 @@ export default function ProjectPage({
 
       </section>
 
-
-      {/* Hero image or video */}
       <section className="mb-8">
 
         {video ? (
-          <div className="aspect-video overflow-hidden rounded-2xl border border-gray-800 bg-gray-900">
 
-            <iframe
-              src={video}
-              className="h-full w-full"
-              allowFullScreen
-              title={`${title} demo`}
-            />
+          isLocalVideo ? (
 
-          </div>
+            <div className="overflow-hidden rounded-2xl border border-gray-800 bg-black">
+
+              <video
+                src={video}
+                poster={image}
+                autoPlay
+                loop
+                muted
+                playsInline
+                controls
+                preload="metadata"
+                className="block h-auto w-full"
+              >
+                Your browser does not support video playback.
+              </video>
+
+            </div>
+
+          ) : (
+
+            <div className="aspect-video overflow-hidden rounded-2xl border border-gray-800 bg-gray-900">
+
+              <iframe
+                src={video}
+                className="h-full w-full"
+                allowFullScreen
+                title={`${title} demo`}
+              />
+
+            </div>
+
+          )
+
         ) : (
+
           <button
             type="button"
             onClick={() =>
@@ -365,15 +456,13 @@ export default function ProjectPage({
             </div>
 
           </button>
+
         )}
 
       </section>
 
-
-      {/* Main project content */}
       <div className="grid gap-20 md:grid-cols-[minmax(0,1fr)_260px]">
 
-        {/* Project sections */}
         <div>
 
           {sections.map((section) => {
@@ -393,7 +482,6 @@ export default function ProjectPage({
                   {section.title}
                 </h2>
 
-
                 {section.blocks.map(
                   (block, index) => {
 
@@ -411,6 +499,39 @@ export default function ProjectPage({
                       );
                     }
 
+                    if (
+                      block.type ===
+                      "equation"
+                    ) {
+                      return (
+                        <figure
+                          key={index}
+                          className="mt-4"
+                        >
+
+                          <div className="mx-auto w-fit max-w-full overflow-x-auto rounded-lg border border-gray-800 bg-gray-900/60 px-4 py-1.5">
+
+                            <div
+                              className="min-w-max text-center text-base text-white md:text-lg [&_.katex-display]:my-1"
+                              dangerouslySetInnerHTML={{
+                                __html:
+                                  renderEquation(
+                                    block.equation
+                                  ),
+                              }}
+                            />
+
+                          </div>
+
+                          {block.caption && (
+                            <figcaption className="mt-1.5 text-center text-sm text-gray-400">
+                              {block.caption}
+                            </figcaption>
+                          )}
+
+                        </figure>
+                      );
+                    }
 
                     if (
                       block.type ===
@@ -450,7 +571,6 @@ export default function ProjectPage({
 
                           </button>
 
-
                           {block.image.caption && (
                             <figcaption className="mt-2 text-center text-sm text-gray-400">
                               {
@@ -463,7 +583,6 @@ export default function ProjectPage({
                         </figure>
                       );
                     }
-
 
                     if (
                       block.type ===
@@ -481,7 +600,6 @@ export default function ProjectPage({
                       );
                     }
 
-
                     return null;
                   }
                 )}
@@ -492,8 +610,6 @@ export default function ProjectPage({
 
         </div>
 
-
-        {/* Table of Contents */}
         <aside className="relative hidden md:block">
 
           <div
@@ -536,12 +652,10 @@ export default function ProjectPage({
                       "
                     >
 
-                      {/* Active section */}
                       <span
                         className={`
                           text-base
                           font-medium
-
                           ${
                             isActive
                               ? "block text-white group-hover:hidden"
@@ -552,14 +666,11 @@ export default function ProjectPage({
                         {section.title}
                       </span>
 
-
-                      {/* Inactive line */}
                       <span
                         className={`
                           h-[2px]
                           rounded-full
                           bg-gray-600
-
                           ${
                             isActive
                               ? "hidden"
@@ -568,8 +679,6 @@ export default function ProjectPage({
                         `}
                       />
 
-
-                      {/* All section names on hover */}
                       <span
                         className="
                           hidden
@@ -596,8 +705,6 @@ export default function ProjectPage({
 
       </div>
 
-
-      {/* Image lightbox */}
       {selectedImage && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-6"
@@ -616,7 +723,6 @@ export default function ProjectPage({
           >
             ×
           </button>
-
 
           <div
             className="relative h-[85vh] w-[90vw] max-w-6xl"
