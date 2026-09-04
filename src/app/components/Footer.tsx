@@ -8,33 +8,34 @@ export default function Footer() {
           © 2026 Michael Chen
         </p>
 
-        <div className="flex gap-5">
+
+        <div className="flex items-center gap-3">
 
           <a
             href="https://github.com/Migdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="transition hover:text-white"
+            className="transition hover:scale-105"
           >
-            GitHub
+            <img
+              src="https://img.shields.io/badge/GitHub-181717?logo=github&logoColor=white"
+              alt="GitHub"
+              className="h-6"
+            />
           </a>
+
 
           <a
             href="https://www.linkedin.com/in/michaeldchen/"
             target="_blank"
             rel="noopener noreferrer"
-            className="transition hover:text-white"
+            className="transition hover:scale-105"
           >
-            LinkedIn
-          </a>
-
-          <a
-            href="/resume.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="transition hover:text-white"
-          >
-            Resume
+            <img
+              src="https://custom-icon-badges.demolab.com/badge/LinkedIn-0A66C2?logo=linkedin-white&logoColor=fff"
+              alt="LinkedIn"
+              className="h-6"
+            />
           </a>
 
         </div>

@@ -1,10 +1,57 @@
-import Link from "next/link";
+"use client";
+
+import { useState } from "react";
 import ProjectCard from "./components/ProjectCard";
+import ExperienceItem from "./components/ExperienceItem";
+import CertificateItem from "./components/CertificateItem";
+import { projects } from "./data/projects";
 
 export default function Home() {
+  const [projectPage, setProjectPage] = useState<number>(0);
+
+  const projectsPerPage: number = 6;
+
+  const start: number = projectPage * projectsPerPage;
+
+  const visibleProjects = projects.slice(
+    start,
+    start + projectsPerPage
+  );
+
+  const totalPages: number = Math.ceil(
+    projects.length / projectsPerPage
+  );
+
+  const goToProjectPage = (newPage: number): void => {
+    setProjectPage(newPage);
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        const projectGrid =
+          document.getElementById("project-cards");
+
+        if (!projectGrid) return;
+
+        const previousScrollBehavior =
+          document.documentElement.style.scrollBehavior;
+
+        document.documentElement.style.scrollBehavior = "auto";
+
+        projectGrid.scrollIntoView({
+          behavior: "auto",
+          block: "start",
+        });
+
+        document.documentElement.style.scrollBehavior =
+          previousScrollBehavior;
+      });
+    });
+  };
+
   return (
     <main className="mx-auto max-w-5xl px-6 text-gray-100">
 
+      {/* Intro */}
       <section className="mb-10">
 
         <h1 className="max-w-3xl text-5xl font-bold leading-tight text-white md:text-6xl">
@@ -26,31 +73,43 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="mt-8 flex flex-wrap gap-4">
+
+        {/* Social / Resume */}
+        <div className="mt-8 flex flex-wrap items-center gap-3">
 
           <a
             href="https://github.com/Migdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-lg bg-gray-100 px-5 py-3 font-medium text-gray-950 transition hover:bg-white"
+            className="transition hover:scale-105"
           >
-            GitHub
+            <img
+              src="https://img.shields.io/badge/GitHub-181717?logo=github&logoColor=white"
+              alt="GitHub"
+              className="h-8"
+            />
           </a>
+
 
           <a
             href="https://www.linkedin.com/in/michaeldchen/"
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-lg bg-gray-100 px-5 py-3 font-medium text-gray-950 transition hover:bg-white"
+            className="transition hover:scale-105"
           >
-            LinkedIn
+            <img
+              src="https://custom-icon-badges.demolab.com/badge/LinkedIn-0A66C2?logo=linkedin-white&logoColor=fff"
+              alt="LinkedIn"
+              className="h-8"
+            />
           </a>
+
 
           <a
             href="/resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-lg bg-gray-100 px-5 py-3 font-medium text-gray-950 transition hover:bg-white"
+            className="rounded-lg bg-[#222222] px-5 py-2 font-medium text-white transition hover:bg-[#2C2C2C]"
           >
             Resume
           </a>
@@ -60,13 +119,13 @@ export default function Home() {
       </section>
 
 
-      <section id="projects" className="scroll-mt-18">
+      {/* Projects */}
+      <section
+        id="projects"
+        className="scroll-mt-18 mb-20"
+      >
 
         <div className="mb-10">
-
-          <p className="text-sm uppercase tracking-[0.2em] text-gray-300">
-            Selected Work
-          </p>
 
           <h2 className="mt-2 text-3xl font-bold text-white">
             Featured Projects
@@ -80,51 +139,128 @@ export default function Home() {
         </div>
 
 
-        <div className="grid gap-8 md:grid-cols-2">
+        {/* Project cards */}
+        <div
+          id="project-cards"
+          className="scroll-mt-20 grid grid-cols-1 gap-8 md:grid-cols-2"
+        >
+          {visibleProjects.map((project) => (
+            <ProjectCard
+              key={project.title}
+              title={project.title}
+              description={project.description}
+              technologies={project.technologies}
+              href={project.href}
+              image={project.image}
+            />
+          ))}
+        </div>
 
-          <ProjectCard
-            title="Real Estate Data Analytics Pipeline"
-            description="Built an end-to-end analytics pipeline for MLS housing data, including data cleaning, feature engineering, geospatial enrichment, outlier detection, and interactive Tableau dashboards."
-            technologies={[
-              "Python",
-              "Pandas",
-              "GeoPandas",
-              "Tableau",
-              "Data Cleaning",
-              "Feature Engineering",
-              "Data Visualization",
-            ]}
-            href="/projects/idx-analytics"
-            image="/images/idx-project.png"
+
+        {/* Project pagination */}
+        {totalPages > 1 && (
+          <div className="mt-8 flex flex-col items-center">
+
+            <div className="flex items-center justify-center gap-3">
+
+              <button
+                type="button"
+                onClick={() =>
+                  goToProjectPage(
+                    Math.max(projectPage - 1, 0)
+                  )
+                }
+                disabled={projectPage === 0}
+                className="rounded-lg border border-gray-700 px-4 py-2 text-xl text-gray-200 transition hover:bg-gray-800 disabled:cursor-not-allowed disabled:opacity-30"
+              >
+                ←
+              </button>
+
+              <button
+                type="button"
+                onClick={() =>
+                  goToProjectPage(
+                    Math.min(
+                      projectPage + 1,
+                      totalPages - 1
+                    )
+                  )
+                }
+                disabled={projectPage === totalPages - 1}
+                className="rounded-lg border border-gray-700 px-4 py-2 text-xl text-gray-200 transition hover:bg-gray-800 disabled:cursor-not-allowed disabled:opacity-30"
+              >
+                →
+              </button>
+
+            </div>
+
+            <span className="mt-2 text-center text-sm font-medium text-gray-400">
+              {projectPage + 1} / {totalPages}
+            </span>
+
+          </div>
+        )}
+
+      </section>
+
+
+      {/* Experience */}
+      <section
+        id="experience"
+        className="scroll-mt-8 border-t border-gray-800 pt-10"
+      >
+
+        <h2 className="text-4xl font-bold text-white">
+          Experience
+        </h2>
+
+        <div className="mt-10 space-y-12">
+
+          <ExperienceItem
+            title="Data Analyst Intern"
+            company="IDX Exchange"
+            date="June 2026 – September 2026"
+            description={
+              "Built an end-to-end real estate analytics pipeline using Python " +
+              "and large-scale MLS datasets, transforming raw monthly data into " +
+              "analysis-ready datasets through data cleaning, validation, feature " +
+              "engineering, outlier detection, mortgage-rate integration, and geospatial " +
+              "enrichment. Developed interactive Tableau dashboards to surface housing " +
+              "market trends, pricing insights, geographic patterns, and competitive " +
+              "performance across agents and offices."
+            }
+            projectHref="/projects/idx-analytics"
           />
 
-          <ProjectCard
-            title="Machine Learning Neural Network Exploration"
-            description="Developed Hopfield Networks and Restricted Boltzmann Machines from scratch without machine learning libraries."
-            technologies={[
-              "Python",
-              "NumPy",
-              "Machine Learning",
-              "Hopfield Networks",
-              "Restricted Boltzmann Machines",
-              "Energy-Based Models",
-            ]}
-            href="/projects/machine-learning"
-            image="/images/ml-corrupt.png"
+        </div>
+
+      </section>
+
+
+      {/* Certifications */}
+      <section
+        id="certifications"
+        className="mt-16 border-t border-gray-800 pt-10 pb-16"
+      >
+
+        <h2 className="text-4xl font-bold text-white">
+          Certifications
+        </h2>
+
+        <div className="mt-10 space-y-10">
+
+          <CertificateItem
+            title="Intermediate Machine Learning"
+            issuer="Kaggle"
+            date="Issued August 2026"
+            credentialUrl="https://www.kaggle.com/learn/certification/migdfme/intermediate-machine-learning"
           />
 
-          <ProjectCard
-            title="Galaxy Classification"
-            description="Deep learning for galaxy morphology classification using astronomical images."
-            technologies={[
-              "Python",
-              "PyTorch",
-              "Computer Vision",
-              "Deep Learning",
-              "CNN",
-            ]}
-            href="/projects/galaxy-zoo"
-            image="/images/galaxy-project.png"
+          <CertificateItem
+            title="Intro to Machine Learning"
+            issuer="Kaggle"
+            date="Issued August 2026"
+            credentialUrl="https://www.kaggle.com/learn/certification/migdfme/intro-to-machine-learning"
           />
 
         </div>

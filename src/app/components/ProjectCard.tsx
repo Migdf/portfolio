@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import TechnologyBadge from "./TechnologyBadge";
 
 type ProjectCardProps = {
   title: string;
@@ -19,19 +20,27 @@ export default function ProjectCard({
   return (
     <Link
       href={href}
-      className="group block overflow-hidden rounded-2xl border border-gray-800 bg-gray-900 transition hover:-translate-y-1 hover:border-gray-700 hover:shadow-xl hover:shadow-black/30"
+      scroll={true}
+      className="group block overflow-hidden rounded-2xl border border-gray-800 bg-gray-900 transition hover:border-gray-700"
     >
-      <div className="relative aspect-[16/9] overflow-hidden border-b border-gray-800 bg-gray-900">
+
+      {/* Image */}
+      <div className="relative aspect-video overflow-hidden bg-gray-900">
+
         <Image
           src={image}
           alt={title}
           fill
           className="object-contain p-2 transition-transform duration-300 group-hover:scale-[1.03]"
         />
+
       </div>
 
-      <div className="p-7">
-        <h3 className="text-2xl font-bold text-white">
+
+      {/* Content */}
+      <div className="p-6">
+
+        <h3 className="text-xl font-bold text-white">
           {title}
         </h3>
 
@@ -39,21 +48,21 @@ export default function ProjectCard({
           {description}
         </p>
 
-        <div className="mt-5 flex flex-wrap gap-2">
+
+        {/* Technology badges */}
+        <div className="mt-5 flex flex-wrap items-center gap-2">
+
           {technologies.map((technology) => (
-            <span
+            <TechnologyBadge
               key={technology}
-              className="rounded-full bg-gray-800 px-3 py-1 text-sm text-gray-200"
-            >
-              {technology}
-            </span>
+              technology={technology}
+            />
           ))}
+
         </div>
 
-        <p className="mt-6 font-medium text-gray-200 transition group-hover:text-white">
-          View Project →
-        </p>
       </div>
+
     </Link>
   );
 }
