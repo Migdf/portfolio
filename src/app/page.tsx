@@ -52,30 +52,37 @@ export default function Home() {
     <main className="mx-auto max-w-5xl px-6 text-gray-100">
 
       {/* Intro */}
-      <section className="mb-10">
+      <section className="mb-14 pt-10 text-center">
 
-        <h1 className="max-w-3xl text-5xl font-bold leading-tight text-white md:text-6xl">
+        <h1 className="mx-auto max-w-3xl text-5xl font-bold leading-[0.9] text-white md:text-8xl">
           Michael Chen
         </h1>
 
-        <p className="mt-1 text-2xl font-medium text-gray-300">
+        <p className="mt-0 text-2xl font-medium text-gray-300">
           Machine Learning • Data Science • Computational Physics
         </p>
 
-        <p className="mt-1 text-sm font-medium uppercase tracking-[0.12em] text-[#B7BCC5]">
-          Current M.S. AI/ML, UW Seattle 2028 • B.S. Physics, UIUC 2026
+        <p className="mt-2 text-sm font-medium uppercase tracking-[0.12em] text-[#B7BCC5]">
+          Current M.S. AI/ML, UW Seattle (EGT 2028)
         </p>
 
-        <div className="mt-5 max-w-2xl text-lg leading-8 text-gray-300">
+        <p className="mt-1 text-sm font-medium uppercase tracking-[0.12em] text-[#B7BCC5]">
+          B.S. Physics, UIUC 2026
+        </p>
+
+        <div className="mx-auto mt-10 max-w-2xl text-lg leading-8 text-gray-300">
           <p>
-            I build machine learning and data-driven systems with interests in
-            artificial intelligence, scientific computing, optimization, and analytics.
+            I combine a background in physics with machine learning and
+            scientific computing to build data-driven models for complex
+            systems. My work sits at the intersection of computational physics
+            and AI, using numerical methods, optimization, and machine learning
+            to solve technical problems.
           </p>
         </div>
 
 
         {/* Social / Resume */}
-        <div className="mt-8 flex flex-wrap items-center gap-3">
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
 
           <a
             href="https://github.com/Migdf"
@@ -115,6 +122,27 @@ export default function Home() {
           </a>
 
         </div>
+
+
+        {/* Scroll down arrow */}
+        <a
+          href="#projects"
+          aria-label="Scroll to projects"
+          className="mt-8 inline-flex animate-bounce items-center justify-center text-gray-400 transition hover:text-white"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="h-8 w-8"
+          >
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </a>
 
       </section>
 

@@ -21,7 +21,7 @@ export default function ProjectCard({
     <Link
       href={href}
       scroll={true}
-      className="group block overflow-hidden rounded-2xl border border-gray-800 bg-gray-900 transition hover:border-gray-700"
+      className="block overflow-hidden rounded-2xl border border-gray-800 bg-gray-900 transition hover:border-gray-700"
     >
 
       {/* Image */}
@@ -31,7 +31,7 @@ export default function ProjectCard({
           src={image}
           alt={title}
           fill
-          className="object-contain p-2 transition-transform duration-300 group-hover:scale-[1.03]"
+          className="object-contain p-2"
         />
 
       </div>
