@@ -294,19 +294,22 @@ export default function ProjectPage({
   }, [sections]);
 
   return (
-    <main className="mx-auto max-w-7xl px-6 pt-0 pb-8 text-gray-100">
+    <main className="mx-auto max-w-7xl px-6 pt-4 pb-8 text-gray-100">
 
-      <section className="mb-8">
+      {/* Project header */}
+      <section className="mb-8 text-center">
 
-        <h1 className="max-w-4xl text-4xl font-bold leading-tight text-white md:text-5xl">
+        <h1 className="mx-auto max-w-4xl text-center text-4xl font-bold leading-tight text-white md:text-5xl">
           {title}
         </h1>
 
-        <p className="mt-5 max-w-3xl text-xl leading-8 text-gray-300">
+        {/* Centered container, left-aligned intro text */}
+        <p className="mx-auto mt-5 max-w-3xl text-left text-xl leading-8 text-gray-300">
           {subtitle}
         </p>
 
-        <div className="mt-6 flex flex-wrap items-center gap-2">
+        {/* Technology badges */}
+        <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
           {technologies.map(
             (technology) => (
               <TechnologyBadge
@@ -317,8 +320,9 @@ export default function ProjectPage({
           )}
         </div>
 
+        {/* Project links */}
         {links.length > 0 && (
-          <div className="mt-8 flex flex-wrap items-center gap-3">
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
 
             {links.map((link) => {
               const normalizedLabel =
@@ -392,6 +396,8 @@ export default function ProjectPage({
 
       </section>
 
+
+      {/* Hero image / video */}
       <section className="mb-8">
 
         {video ? (
@@ -461,6 +467,8 @@ export default function ProjectPage({
 
       </section>
 
+
+      {/* Content + TOC */}
       <div className="grid gap-20 md:grid-cols-[minmax(0,1fr)_260px]">
 
         <div>
@@ -610,6 +618,8 @@ export default function ProjectPage({
 
         </div>
 
+
+        {/* Table of contents */}
         <aside className="relative hidden md:block">
 
           <div
@@ -705,6 +715,8 @@ export default function ProjectPage({
 
       </div>
 
+
+      {/* Image modal */}
       {selectedImage && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-6"

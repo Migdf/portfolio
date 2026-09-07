@@ -1,0 +1,36 @@
+@keyframes starPulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: var(--star-opacity);
+    filter: brightness(1);
+    box-shadow: none;
+  }
+
+  45% {
+    transform: scale(1.35);
+    opacity: min(1, calc(var(--star-opacity) + 0.35));
+    filter: brightness(2.2);
+    box-shadow:
+      0 0 4px rgba(255, 255, 255, 0.35),
+      0 0 8px rgba(255, 255, 255, 0.16);
+  }
+
+  70% {
+    transform: scale(0.9);
+    opacity: calc(var(--star-opacity) * 0.7);
+    filter: brightness(0.8);
+    box-shadow: none;
+  }
+}
+
+.pulse {
+  transform-origin: center;
+  will-change: transform, opacity, filter;
+
+  animation-name: starPulse;
+  animation-duration: var(--star-duration);
+  animation-delay: var(--star-delay);
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}

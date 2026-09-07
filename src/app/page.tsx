@@ -1,10 +1,83 @@
 "use client";
 
 import { useState } from "react";
+import type { CSSProperties } from "react";
 import ProjectCard from "./components/ProjectCard";
 import ExperienceItem from "./components/ExperienceItem";
 import CertificateItem from "./components/CertificateItem";
 import { projects } from "./data/projects";
+import styles from "./page.module.css";
+
+const stars = [
+  // Far left
+  { left: "2%", top: "9%", size: 2, opacity: 0.35 },
+  { left: "4%", top: "31%", size: 3, opacity: 0.45, pulse: true, duration: 3.2, delay: 0.4 },
+  { left: "6%", top: "18%", size: 2, opacity: 0.25 },
+  { left: "7%", top: "52%", size: 4, opacity: 0.35 },
+  { left: "9%", top: "72%", size: 2, opacity: 0.3, pulse: true, duration: 5.2, delay: 1.7 },
+  { left: "11%", top: "39%", size: 3, opacity: 0.5 },
+  { left: "12%", top: "12%", size: 2, opacity: 0.35 },
+  { left: "14%", top: "61%", size: 2, opacity: 0.25 },
+  { left: "15%", top: "25%", size: 4, opacity: 0.4, pulse: true, duration: 4.1, delay: 2.1 },
+  { left: "17%", top: "82%", size: 3, opacity: 0.25 },
+  { left: "18%", top: "44%", size: 2, opacity: 0.35 },
+  { left: "20%", top: "7%", size: 3, opacity: 0.45, pulse: true, duration: 5.8, delay: 0.9 },
+  { left: "21%", top: "67%", size: 2, opacity: 0.2 },
+  { left: "23%", top: "32%", size: 3, opacity: 0.4 },
+  { left: "25%", top: "16%", size: 2, opacity: 0.3 },
+  { left: "26%", top: "53%", size: 4, opacity: 0.3, pulse: true, duration: 3.6, delay: 1.4 },
+  { left: "28%", top: "77%", size: 2, opacity: 0.2 },
+  { left: "29%", top: "26%", size: 3, opacity: 0.45 },
+  { left: "31%", top: "10%", size: 2, opacity: 0.25 },
+  { left: "32%", top: "62%", size: 3, opacity: 0.3, pulse: true, duration: 4.7, delay: 1.3 },
+  { left: "34%", top: "38%", size: 2, opacity: 0.25 },
+  { left: "36%", top: "20%", size: 3, opacity: 0.35 },
+  { left: "38%", top: "71%", size: 2, opacity: 0.2 },
+
+  // Center-left
+  { left: "40%", top: "12%", size: 2, opacity: 0.25 },
+  { left: "43%", top: "28%", size: 3, opacity: 0.3, pulse: true, duration: 5.5, delay: 2.2 },
+  { left: "44.5%", top: "74%", size: 2, opacity: 0.18 },
+  { left: "46%", top: "8%", size: 3, opacity: 0.22 },
+
+  // Center
+  { left: "48%", top: "37%", size: 2, opacity: 0.16 },
+  { left: "49.5%", top: "15%", size: 2, opacity: 0.18 },
+
+  // Divider area kept clear
+  { left: "52.5%", top: "24%", size: 3, opacity: 0.25, pulse: true, duration: 4.3, delay: 0.6 },
+
+  // Center-right
+  { left: "54%", top: "78%", size: 2, opacity: 0.18 },
+  { left: "56%", top: "11%", size: 3, opacity: 0.22 },
+  { left: "59%", top: "29%", size: 3, opacity: 0.25, pulse: true, duration: 6.0, delay: 3.1 },
+  { left: "60.5%", top: "69%", size: 2, opacity: 0.2 },
+
+  // Right
+  { left: "62%", top: "19%", size: 3, opacity: 0.35 },
+  { left: "64%", top: "72%", size: 2, opacity: 0.2 },
+  { left: "66%", top: "36%", size: 2, opacity: 0.25 },
+  { left: "68%", top: "9%", size: 3, opacity: 0.4, pulse: true, duration: 3.4, delay: 1.8 },
+  { left: "69%", top: "58%", size: 3, opacity: 0.3 },
+  { left: "71%", top: "25%", size: 2, opacity: 0.3 },
+  { left: "73%", top: "79%", size: 2, opacity: 0.2 },
+  { left: "74%", top: "44%", size: 4, opacity: 0.3, pulse: true, duration: 5.0, delay: 0.5 },
+  { left: "76%", top: "15%", size: 2, opacity: 0.3 },
+  { left: "78%", top: "65%", size: 3, opacity: 0.35 },
+  { left: "79%", top: "32%", size: 3, opacity: 0.4, pulse: true, duration: 3.8, delay: 2.5 },
+  { left: "81%", top: "8%", size: 3, opacity: 0.45 },
+  { left: "82%", top: "52%", size: 2, opacity: 0.3 },
+  { left: "84%", top: "73%", size: 2, opacity: 0.25 },
+  { left: "85%", top: "23%", size: 4, opacity: 0.4, pulse: true, duration: 5.6, delay: 1.1 },
+  { left: "87%", top: "42%", size: 2, opacity: 0.35 },
+  { left: "88%", top: "84%", size: 3, opacity: 0.25 },
+  { left: "90%", top: "12%", size: 2, opacity: 0.35 },
+  { left: "91%", top: "60%", size: 3, opacity: 0.4, pulse: true, duration: 4.5, delay: 3.2 },
+  { left: "93%", top: "34%", size: 2, opacity: 0.3 },
+  { left: "95%", top: "76%", size: 2, opacity: 0.25 },
+  { left: "96%", top: "19%", size: 3, opacity: 0.45, pulse: true, duration: 3.7, delay: 2.1 },
+  { left: "98%", top: "49%", size: 2, opacity: 0.3 },
+];
 
 export default function Home() {
   const [projectPage, setProjectPage] = useState<number>(0);
@@ -52,85 +125,51 @@ export default function Home() {
     <main className="mx-auto max-w-5xl px-6 text-gray-100">
 
       {/* Intro */}
-      <section className="relative mb-14 overflow-hidden pt-10 text-center">
+      <section className="relative mb-14 pt-10 text-center">
 
-        {/* Decorative stars */}
-        <div className="pointer-events-none absolute inset-0 -z-10">
+        {/* Full-width star field */}
+        <div className="pointer-events-none absolute left-1/2 top-0 -z-10 h-full w-screen -translate-x-1/2 overflow-hidden">
 
-          {/* Left side */}
-          <span className="absolute left-[5%] top-[8%] h-1 w-1 rounded-full bg-white/60" />
-          <span className="absolute left-[8%] top-[20%] h-0.5 w-0.5 rounded-full bg-white/35" />
-          <span className="absolute left-[11%] top-[34%] h-1 w-1 rounded-full bg-white/45" />
-          <span className="absolute left-[14%] top-[14%] h-1.5 w-1.5 rounded-full bg-white/40" />
-          <span className="absolute left-[16%] top-[46%] h-0.5 w-0.5 rounded-full bg-white/30" />
-          <span className="absolute left-[18%] top-[28%] h-1 w-1 rounded-full bg-white/50" />
-          <span className="absolute left-[21%] top-[10%] h-0.5 w-0.5 rounded-full bg-white/30" />
-          <span className="absolute left-[23%] top-[38%] h-1.5 w-1.5 rounded-full bg-white/35" />
-          <span className="absolute left-[26%] top-[18%] h-1 w-1 rounded-full bg-white/55" />
-          <span className="absolute left-[29%] top-[30%] h-0.5 w-0.5 rounded-full bg-white/25" />
-          <span className="absolute left-[31%] top-[7%] h-1 w-1 rounded-full bg-white/40" />
-          <span className="absolute left-[34%] top-[44%] h-1 w-1 rounded-full bg-white/30" />
-          <span className="absolute left-[37%] top-[22%] h-0.5 w-0.5 rounded-full bg-white/25" />
+          {stars.map((star, index) => {
+            const starStyle = {
+              left: star.left,
+              top: star.top,
+              width: `${star.size}px`,
+              height: `${star.size}px`,
+              opacity: star.opacity,
 
-          <span className="absolute left-[7%] top-[58%] h-1 w-1 rounded-full bg-white/35" />
-          <span className="absolute left-[12%] top-[70%] h-0.5 w-0.5 rounded-full bg-white/25" />
-          <span className="absolute left-[18%] top-[62%] h-1.5 w-1.5 rounded-full bg-white/30" />
-          <span className="absolute left-[24%] top-[76%] h-1 w-1 rounded-full bg-white/20" />
-          <span className="absolute left-[30%] top-[66%] h-0.5 w-0.5 rounded-full bg-white/20" />
-          <span className="absolute left-[36%] top-[56%] h-1 w-1 rounded-full bg-white/25" />
-          <span className="absolute left-[9%] top-[82%] h-0.5 w-0.5 rounded-full bg-white/20" />
-          <span className="absolute left-[16%] top-[86%] h-1 w-1 rounded-full bg-white/20" />
-          <span className="absolute left-[28%] top-[84%] h-0.5 w-0.5 rounded-full bg-white/15" />
+              "--star-opacity": star.opacity,
 
-          {/* Right side */}
-          <span className="absolute right-[5%] top-[10%] h-1 w-1 rounded-full bg-white/60" />
-          <span className="absolute right-[8%] top-[24%] h-0.5 w-0.5 rounded-full bg-white/35" />
-          <span className="absolute right-[11%] top-[36%] h-1 w-1 rounded-full bg-white/45" />
-          <span className="absolute right-[14%] top-[16%] h-1.5 w-1.5 rounded-full bg-white/40" />
-          <span className="absolute right-[17%] top-[48%] h-0.5 w-0.5 rounded-full bg-white/30" />
-          <span className="absolute right-[19%] top-[30%] h-1 w-1 rounded-full bg-white/50" />
-          <span className="absolute right-[22%] top-[11%] h-0.5 w-0.5 rounded-full bg-white/30" />
-          <span className="absolute right-[24%] top-[40%] h-1.5 w-1.5 rounded-full bg-white/35" />
-          <span className="absolute right-[27%] top-[20%] h-1 w-1 rounded-full bg-white/55" />
-          <span className="absolute right-[30%] top-[32%] h-0.5 w-0.5 rounded-full bg-white/25" />
-          <span className="absolute right-[32%] top-[8%] h-1 w-1 rounded-full bg-white/40" />
-          <span className="absolute right-[35%] top-[45%] h-1 w-1 rounded-full bg-white/30" />
-          <span className="absolute right-[38%] top-[23%] h-0.5 w-0.5 rounded-full bg-white/25" />
+              "--star-duration": star.pulse
+                ? `${star.duration}s`
+                : undefined,
 
-          <span className="absolute right-[7%] top-[60%] h-1 w-1 rounded-full bg-white/35" />
-          <span className="absolute right-[13%] top-[72%] h-0.5 w-0.5 rounded-full bg-white/25" />
-          <span className="absolute right-[19%] top-[64%] h-1.5 w-1.5 rounded-full bg-white/30" />
-          <span className="absolute right-[25%] top-[78%] h-1 w-1 rounded-full bg-white/20" />
-          <span className="absolute right-[31%] top-[68%] h-0.5 w-0.5 rounded-full bg-white/20" />
-          <span className="absolute right-[37%] top-[58%] h-1 w-1 rounded-full bg-white/25" />
-          <span className="absolute right-[10%] top-[84%] h-0.5 w-0.5 rounded-full bg-white/20" />
-          <span className="absolute right-[18%] top-[88%] h-1 w-1 rounded-full bg-white/20" />
-          <span className="absolute right-[29%] top-[85%] h-0.5 w-0.5 rounded-full bg-white/15" />
+              "--star-delay": star.pulse
+                ? `${star.delay}s`
+                : undefined,
+            } as CSSProperties;
 
-          {/* Center / near-title stars */}
-          <span className="absolute left-[41%] top-[6%] h-0.5 w-0.5 rounded-full bg-white/25" />
-          <span className="absolute left-[44%] top-[16%] h-1 w-1 rounded-full bg-white/20" />
-          <span className="absolute left-[47%] top-[27%] h-0.5 w-0.5 rounded-full bg-white/20" />
-          <span className="absolute left-[49%] top-[9%] h-1 w-1 rounded-full bg-white/15" />
-
-          <span className="absolute right-[41%] top-[7%] h-0.5 w-0.5 rounded-full bg-white/25" />
-          <span className="absolute right-[44%] top-[18%] h-1 w-1 rounded-full bg-white/20" />
-          <span className="absolute right-[47%] top-[29%] h-0.5 w-0.5 rounded-full bg-white/20" />
-          <span className="absolute right-[49%] top-[12%] h-1 w-1 rounded-full bg-white/15" />
-
-          {/* Lower subtle stars */}
-          <span className="absolute left-[42%] top-[62%] h-0.5 w-0.5 rounded-full bg-white/15" />
-          <span className="absolute left-[46%] top-[74%] h-1 w-1 rounded-full bg-white/15" />
-          <span className="absolute right-[43%] top-[64%] h-0.5 w-0.5 rounded-full bg-white/15" />
-          <span className="absolute right-[47%] top-[76%] h-1 w-1 rounded-full bg-white/15" />
+            return (
+              <span
+                key={`portfolio-star-${index}`}
+                className={
+                  star.pulse
+                    ? `${styles.pulse} absolute rounded-full bg-white`
+                    : "absolute rounded-full bg-white"
+                }
+                style={starStyle}
+              />
+            );
+          })}
 
         </div>
+
 
         <h1 className="mx-auto max-w-3xl text-5xl font-bold leading-[0.9] text-white md:text-8xl">
           Michael Chen
         </h1>
 
-        <p className="mt-2 text-2xl font-medium text-gray-300">
+        <p className="mt-8 text-2xl font-medium text-gray-300">
           Machine Learning • Data Science • Computational Physics
         </p>
 
@@ -142,9 +181,12 @@ export default function Home() {
           B.S. Physics, UIUC 2026
         </p>
 
+
         {/* Divider */}
         <div className="mx-auto mt-6 h-px w-48 bg-gray-700 md:w-64" />
 
+
+        {/* Intro text */}
         <div className="mx-auto mt-8 max-w-2xl text-left text-lg leading-8 text-gray-300">
           <p>
             I combine a background in physics with machine learning and
@@ -240,7 +282,6 @@ export default function Home() {
         </div>
 
 
-        {/* Project cards */}
         <div
           id="project-cards"
           className="scroll-mt-20 grid grid-cols-1 gap-8 md:grid-cols-2"
@@ -258,7 +299,6 @@ export default function Home() {
         </div>
 
 
-        {/* Project pagination */}
         {totalPages > 1 && (
           <div className="mt-8 flex flex-col items-center">
 
