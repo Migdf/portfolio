@@ -52,13 +52,85 @@ export default function Home() {
     <main className="mx-auto max-w-5xl px-6 text-gray-100">
 
       {/* Intro */}
-      <section className="mb-14 pt-10 text-center">
+      <section className="relative mb-14 overflow-hidden pt-10 text-center">
+
+        {/* Decorative stars */}
+        <div className="pointer-events-none absolute inset-0 -z-10">
+
+          {/* Left side */}
+          <span className="absolute left-[5%] top-[8%] h-1 w-1 rounded-full bg-white/60" />
+          <span className="absolute left-[8%] top-[20%] h-0.5 w-0.5 rounded-full bg-white/35" />
+          <span className="absolute left-[11%] top-[34%] h-1 w-1 rounded-full bg-white/45" />
+          <span className="absolute left-[14%] top-[14%] h-1.5 w-1.5 rounded-full bg-white/40" />
+          <span className="absolute left-[16%] top-[46%] h-0.5 w-0.5 rounded-full bg-white/30" />
+          <span className="absolute left-[18%] top-[28%] h-1 w-1 rounded-full bg-white/50" />
+          <span className="absolute left-[21%] top-[10%] h-0.5 w-0.5 rounded-full bg-white/30" />
+          <span className="absolute left-[23%] top-[38%] h-1.5 w-1.5 rounded-full bg-white/35" />
+          <span className="absolute left-[26%] top-[18%] h-1 w-1 rounded-full bg-white/55" />
+          <span className="absolute left-[29%] top-[30%] h-0.5 w-0.5 rounded-full bg-white/25" />
+          <span className="absolute left-[31%] top-[7%] h-1 w-1 rounded-full bg-white/40" />
+          <span className="absolute left-[34%] top-[44%] h-1 w-1 rounded-full bg-white/30" />
+          <span className="absolute left-[37%] top-[22%] h-0.5 w-0.5 rounded-full bg-white/25" />
+
+          <span className="absolute left-[7%] top-[58%] h-1 w-1 rounded-full bg-white/35" />
+          <span className="absolute left-[12%] top-[70%] h-0.5 w-0.5 rounded-full bg-white/25" />
+          <span className="absolute left-[18%] top-[62%] h-1.5 w-1.5 rounded-full bg-white/30" />
+          <span className="absolute left-[24%] top-[76%] h-1 w-1 rounded-full bg-white/20" />
+          <span className="absolute left-[30%] top-[66%] h-0.5 w-0.5 rounded-full bg-white/20" />
+          <span className="absolute left-[36%] top-[56%] h-1 w-1 rounded-full bg-white/25" />
+          <span className="absolute left-[9%] top-[82%] h-0.5 w-0.5 rounded-full bg-white/20" />
+          <span className="absolute left-[16%] top-[86%] h-1 w-1 rounded-full bg-white/20" />
+          <span className="absolute left-[28%] top-[84%] h-0.5 w-0.5 rounded-full bg-white/15" />
+
+          {/* Right side */}
+          <span className="absolute right-[5%] top-[10%] h-1 w-1 rounded-full bg-white/60" />
+          <span className="absolute right-[8%] top-[24%] h-0.5 w-0.5 rounded-full bg-white/35" />
+          <span className="absolute right-[11%] top-[36%] h-1 w-1 rounded-full bg-white/45" />
+          <span className="absolute right-[14%] top-[16%] h-1.5 w-1.5 rounded-full bg-white/40" />
+          <span className="absolute right-[17%] top-[48%] h-0.5 w-0.5 rounded-full bg-white/30" />
+          <span className="absolute right-[19%] top-[30%] h-1 w-1 rounded-full bg-white/50" />
+          <span className="absolute right-[22%] top-[11%] h-0.5 w-0.5 rounded-full bg-white/30" />
+          <span className="absolute right-[24%] top-[40%] h-1.5 w-1.5 rounded-full bg-white/35" />
+          <span className="absolute right-[27%] top-[20%] h-1 w-1 rounded-full bg-white/55" />
+          <span className="absolute right-[30%] top-[32%] h-0.5 w-0.5 rounded-full bg-white/25" />
+          <span className="absolute right-[32%] top-[8%] h-1 w-1 rounded-full bg-white/40" />
+          <span className="absolute right-[35%] top-[45%] h-1 w-1 rounded-full bg-white/30" />
+          <span className="absolute right-[38%] top-[23%] h-0.5 w-0.5 rounded-full bg-white/25" />
+
+          <span className="absolute right-[7%] top-[60%] h-1 w-1 rounded-full bg-white/35" />
+          <span className="absolute right-[13%] top-[72%] h-0.5 w-0.5 rounded-full bg-white/25" />
+          <span className="absolute right-[19%] top-[64%] h-1.5 w-1.5 rounded-full bg-white/30" />
+          <span className="absolute right-[25%] top-[78%] h-1 w-1 rounded-full bg-white/20" />
+          <span className="absolute right-[31%] top-[68%] h-0.5 w-0.5 rounded-full bg-white/20" />
+          <span className="absolute right-[37%] top-[58%] h-1 w-1 rounded-full bg-white/25" />
+          <span className="absolute right-[10%] top-[84%] h-0.5 w-0.5 rounded-full bg-white/20" />
+          <span className="absolute right-[18%] top-[88%] h-1 w-1 rounded-full bg-white/20" />
+          <span className="absolute right-[29%] top-[85%] h-0.5 w-0.5 rounded-full bg-white/15" />
+
+          {/* Center / near-title stars */}
+          <span className="absolute left-[41%] top-[6%] h-0.5 w-0.5 rounded-full bg-white/25" />
+          <span className="absolute left-[44%] top-[16%] h-1 w-1 rounded-full bg-white/20" />
+          <span className="absolute left-[47%] top-[27%] h-0.5 w-0.5 rounded-full bg-white/20" />
+          <span className="absolute left-[49%] top-[9%] h-1 w-1 rounded-full bg-white/15" />
+
+          <span className="absolute right-[41%] top-[7%] h-0.5 w-0.5 rounded-full bg-white/25" />
+          <span className="absolute right-[44%] top-[18%] h-1 w-1 rounded-full bg-white/20" />
+          <span className="absolute right-[47%] top-[29%] h-0.5 w-0.5 rounded-full bg-white/20" />
+          <span className="absolute right-[49%] top-[12%] h-1 w-1 rounded-full bg-white/15" />
+
+          {/* Lower subtle stars */}
+          <span className="absolute left-[42%] top-[62%] h-0.5 w-0.5 rounded-full bg-white/15" />
+          <span className="absolute left-[46%] top-[74%] h-1 w-1 rounded-full bg-white/15" />
+          <span className="absolute right-[43%] top-[64%] h-0.5 w-0.5 rounded-full bg-white/15" />
+          <span className="absolute right-[47%] top-[76%] h-1 w-1 rounded-full bg-white/15" />
+
+        </div>
 
         <h1 className="mx-auto max-w-3xl text-5xl font-bold leading-[0.9] text-white md:text-8xl">
           Michael Chen
         </h1>
 
-        <p className="mt-0 text-2xl font-medium text-gray-300">
+        <p className="mt-2 text-2xl font-medium text-gray-300">
           Machine Learning • Data Science • Computational Physics
         </p>
 
@@ -70,7 +142,10 @@ export default function Home() {
           B.S. Physics, UIUC 2026
         </p>
 
-        <div className="mx-auto mt-10 max-w-2xl text-lg leading-8 text-gray-300">
+        {/* Divider */}
+        <div className="mx-auto mt-6 h-px w-48 bg-gray-700 md:w-64" />
+
+        <div className="mx-auto mt-8 max-w-2xl text-left text-lg leading-8 text-gray-300">
           <p>
             I combine a background in physics with machine learning and
             scientific computing to build data-driven models for complex
@@ -97,7 +172,6 @@ export default function Home() {
             />
           </a>
 
-
           <a
             href="https://www.linkedin.com/in/michaeldchen/"
             target="_blank"
@@ -110,7 +184,6 @@ export default function Home() {
               className="h-8"
             />
           </a>
-
 
           <a
             href="/resume.pdf"
