@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
 
 export const metadata: Metadata = {
   title: "Michael Chen",
-  description: "Machine Learning and Data Science Portfolio",
+  description:
+    "Machine Learning, Data Science, and Computational Physics portfolio.",
 };
 
 export default function RootLayout({
@@ -15,14 +15,26 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="min-h-screen flex flex-col bg-gray-950 text-gray-100">
-        <Navbar />
+      <body>
+        {children}
 
-        <div className="flex-1">
-          {children}
-        </div>
+        {/* Google Analytics */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-FS8B6SMS96"
+          strategy="afterInteractive"
+        />
 
-        <Footer />
+        <Script
+          id="google-analytics"
+          strategy="afterInteractive"
+        >
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-FS8B6SMS96');
+          `}
+        </Script>
       </body>
     </html>
   );
