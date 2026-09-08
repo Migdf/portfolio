@@ -231,9 +231,30 @@ export default function Home() {
             href="/resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-lg bg-[#222222] px-5 py-2 font-medium text-white transition hover:bg-[#2C2C2C]"
+            className="
+              inline-flex
+              h-8
+              items-center
+              gap-1.5
+              rounded-md
+              bg-[#EC1C24]
+              px-3
+              text-[15px]
+              font-medium
+              text-white
+              transition
+              hover:scale-105
+            "
           >
-            Resume
+            <img
+              src="/pdf-icon.webp"
+              alt=""
+              className="h-6 w-6 object-contain"
+            />
+
+            <span className="leading-none">
+              Resume
+            </span>
           </a>
 
         </div>
