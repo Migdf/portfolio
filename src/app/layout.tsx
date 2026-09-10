@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import "./globals.css";
 
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+
 export const metadata: Metadata = {
   title: "Michael Chen",
   description:
@@ -16,7 +19,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <Navbar />
+
         {children}
+
+        <Footer />
 
         {/* Google Analytics */}
         <Script
@@ -32,6 +39,7 @@ export default function RootLayout({
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
+
             gtag('config', 'G-FS8B6SMS96');
           `}
         </Script>
