@@ -22,6 +22,11 @@ type ProjectImage = {
   caption?: string;
 };
 
+type ProjectAttribution = {
+  label: string;
+  href: string;
+};
+
 type ProjectBlock =
   | {
       type: "text";
@@ -39,6 +44,12 @@ type ProjectBlock =
       type: "equation";
       equation: string;
       caption?: string;
+    }
+  | {
+      type: "link";
+      label: string;
+      href: string;
+      prefix?: string;
     };
 
 type ProjectSection = {
@@ -50,6 +61,7 @@ type ProjectPageProps = {
   title: string;
   subtitle: string;
   image: string;
+  imageAttribution?: ProjectAttribution;
   video?: string;
   technologies: string[];
   sections: ProjectSection[];
@@ -60,6 +72,7 @@ export default function ProjectPage({
   title,
   subtitle,
   image,
+  imageAttribution,
   video,
   technologies,
   sections,
@@ -164,7 +177,6 @@ export default function ProjectPage({
           setActiveSection(
             lastSectionId
           );
-
           return;
         }
 
@@ -207,7 +219,6 @@ export default function ProjectPage({
 
         requestAnimationFrame(() => {
           updateActiveSection();
-
           ticking = false;
         });
       };
@@ -294,21 +305,19 @@ export default function ProjectPage({
   }, [sections]);
 
   return (
-    <main className="mx-auto max-w-7xl px-6 pt-4 pb-8 text-gray-100">
+    <main className="mx-auto max-w-7xl px-6 pt-0 pb-8 text-gray-100">
 
-      {/* Project header */}
+      {/* Hero */}
       <section className="mb-8 text-center">
 
         <h1 className="mx-auto max-w-4xl text-center text-4xl font-bold leading-tight text-white md:text-5xl">
           {title}
         </h1>
 
-        {/* Centered container, left-aligned intro text */}
         <p className="mx-auto mt-5 max-w-3xl text-left text-xl leading-8 text-gray-300">
           {subtitle}
         </p>
 
-        {/* Technology badges */}
         <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
           {technologies.map(
             (technology) => (
@@ -320,10 +329,8 @@ export default function ProjectPage({
           )}
         </div>
 
-        {/* Project links */}
         {links.length > 0 && (
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-
             {links.map((link) => {
               const normalizedLabel =
                 link.label.toLowerCase();
@@ -341,9 +348,7 @@ export default function ProjectPage({
               ) {
                 badgeUrl =
                   "https://img.shields.io/badge/View_Source_Code-181717?logo=github&logoColor=white";
-              }
-
-              else if (
+              } else if (
                 normalizedLabel.includes(
                   "dashboard"
                 ) ||
@@ -353,9 +358,7 @@ export default function ProjectPage({
               ) {
                 badgeUrl =
                   "https://custom-icon-badges.demolab.com/badge/View_Dashboard-0176D3?logo=tableau&logoColor=fff";
-              }
-
-              else if (
+              } else if (
                 normalizedLabel.includes(
                   "colab"
                 ) ||
@@ -390,22 +393,17 @@ export default function ProjectPage({
                 </a>
               );
             })}
-
           </div>
         )}
 
       </section>
 
-
-      {/* Hero image / video */}
+      {/* Main image / video */}
       <section className="mb-8">
 
         {video ? (
-
           isLocalVideo ? (
-
             <div className="overflow-hidden rounded-2xl border border-gray-800 bg-black">
-
               <video
                 src={video}
                 poster={image}
@@ -419,26 +417,18 @@ export default function ProjectPage({
               >
                 Your browser does not support video playback.
               </video>
-
             </div>
-
           ) : (
-
             <div className="aspect-video overflow-hidden rounded-2xl border border-gray-800 bg-gray-900">
-
               <iframe
                 src={video}
                 className="h-full w-full"
                 allowFullScreen
                 title={`${title} demo`}
               />
-
             </div>
-
           )
-
         ) : (
-
           <button
             type="button"
             onClick={() =>
@@ -449,24 +439,36 @@ export default function ProjectPage({
             }
             className="block w-full cursor-zoom-in"
           >
-
             <div className="relative aspect-video overflow-hidden rounded-2xl border border-gray-800 bg-gray-900">
-
               <Image
                 src={image}
                 alt={`${title} project`}
                 fill
                 className="object-contain p-2 transition-transform duration-300 hover:scale-[1.03]"
               />
-
             </div>
-
           </button>
+        )}
 
+        {imageAttribution && (
+          <p className="mt-2 text-center text-xs text-gray-500">
+            Image attribution:{" "}
+            <a
+              href={
+                imageAttribution.href
+              }
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline underline-offset-2 transition hover:text-gray-300"
+            >
+              {
+                imageAttribution.label
+              }
+            </a>
+          </p>
         )}
 
       </section>
-
 
       {/* Content + TOC */}
       <div className="grid gap-20 md:grid-cols-[minmax(0,1fr)_260px]">
@@ -502,7 +504,42 @@ export default function ProjectPage({
                           key={index}
                           className="mt-4 whitespace-pre-line text-lg leading-8 text-gray-200"
                         >
-                          {block.content}
+                          {
+                            block.content
+                          }
+                        </p>
+                      );
+                    }
+
+                    if (
+                      block.type ===
+                      "link"
+                    ) {
+                      return (
+                        <p
+                          key={index}
+                          className="mt-3 text-sm text-gray-400"
+                        >
+                          {block.prefix ??
+                            "Reference:"}{" "}
+                          <a
+                            href={
+                              block.href
+                            }
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="font-medium text-gray-300 underline decoration-gray-600 underline-offset-4 transition hover:text-white hover:decoration-gray-300"
+                          >
+                            {
+                              block.label
+                            }{" "}
+                            <span
+                              aria-hidden="true"
+                              className="text-xs"
+                            >
+                              ↗
+                            </span>
+                          </a>
                         </p>
                       );
                     }
@@ -516,9 +553,7 @@ export default function ProjectPage({
                           key={index}
                           className="mt-4"
                         >
-
                           <div className="mx-auto w-fit max-w-full overflow-x-auto rounded-lg border border-gray-800 bg-gray-900/60 px-4 py-1.5">
-
                             <div
                               className="min-w-max text-center text-base text-white md:text-lg [&_.katex-display]:my-1"
                               dangerouslySetInnerHTML={{
@@ -528,15 +563,15 @@ export default function ProjectPage({
                                   ),
                               }}
                             />
-
                           </div>
 
                           {block.caption && (
                             <figcaption className="mt-1.5 text-center text-sm text-gray-400">
-                              {block.caption}
+                              {
+                                block.caption
+                              }
                             </figcaption>
                           )}
-
                         </figure>
                       );
                     }
@@ -550,7 +585,6 @@ export default function ProjectPage({
                           key={index}
                           className="mt-6"
                         >
-
                           <button
                             type="button"
                             onClick={() =>
@@ -560,9 +594,7 @@ export default function ProjectPage({
                             }
                             className="block w-full cursor-zoom-in"
                           >
-
                             <div className="relative aspect-video overflow-hidden rounded-xl border border-gray-800 bg-gray-900">
-
                               <Image
                                 src={
                                   block.image.src
@@ -574,9 +606,7 @@ export default function ProjectPage({
                                 fill
                                 className="object-contain p-2 transition-transform duration-300 hover:scale-[1.03]"
                               />
-
                             </div>
-
                           </button>
 
                           {block.image.caption && (
@@ -587,7 +617,6 @@ export default function ProjectPage({
                               }
                             </figcaption>
                           )}
-
                         </figure>
                       );
                     }
@@ -602,7 +631,9 @@ export default function ProjectPage({
                           className="mt-6 overflow-x-auto rounded-xl border border-gray-800 bg-black p-5 text-sm leading-6 text-gray-200"
                         >
                           <code>
-                            {block.code}
+                            {
+                              block.code
+                            }
                           </code>
                         </pre>
                       );
@@ -617,7 +648,6 @@ export default function ProjectPage({
           })}
 
         </div>
-
 
         {/* Table of contents */}
         <aside className="relative hidden md:block">
@@ -634,7 +664,6 @@ export default function ProjectPage({
               top: `${tocTop}px`,
             }}
           >
-
             <nav className="flex flex-col items-end gap-2">
 
               {sections.map(
@@ -650,7 +679,9 @@ export default function ProjectPage({
 
                   return (
                     <a
-                      key={section.title}
+                      key={
+                        section.title
+                      }
                       href={`#${sectionId}`}
                       className="
                         flex
@@ -661,7 +692,6 @@ export default function ProjectPage({
                         text-right
                       "
                     >
-
                       <span
                         className={`
                           text-base
@@ -673,7 +703,9 @@ export default function ProjectPage({
                           }
                         `}
                       >
-                        {section.title}
+                        {
+                          section.title
+                        }
                       </span>
 
                       <span
@@ -699,22 +731,21 @@ export default function ProjectPage({
                           group-hover:block
                         "
                       >
-                        {section.title}
+                        {
+                          section.title
+                        }
                       </span>
-
                     </a>
                   );
                 }
               )}
 
             </nav>
-
           </div>
 
         </aside>
 
       </div>
-
 
       {/* Image modal */}
       {selectedImage && (
@@ -724,7 +755,6 @@ export default function ProjectPage({
             setSelectedImage(null)
           }
         >
-
           <button
             type="button"
             onClick={() =>
@@ -742,9 +772,10 @@ export default function ProjectPage({
               event.stopPropagation()
             }
           >
-
             <Image
-              src={selectedImage.src}
+              src={
+                selectedImage.src
+              }
               alt={
                 selectedImage.alt ||
                 ""
@@ -752,9 +783,7 @@ export default function ProjectPage({
               fill
               className="object-contain"
             />
-
           </div>
-
         </div>
       )}
 

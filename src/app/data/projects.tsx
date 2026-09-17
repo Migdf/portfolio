@@ -53,6 +53,22 @@ export const projects: Project[] = [
     image: "/images/galaxy-project.png",
   },
   {
+    title:
+      "Quantum Computing Simulator & Shor’s Algorithm",
+    description:
+      "Built three quantum circuit simulators from scratch and implemented QFT, phase estimation, modular arithmetic, and Shor’s factoring algorithm.",
+    technologies: [
+      "Python",
+      "NumPy",
+      "Quantum Computing",
+      "Shor's Algorithm",
+    ],
+    href:
+      "/projects/quantum-computing",
+    image:
+      "/images/quantum-computing.png",
+  },
+  {
   title: "Fluid Dynamics Simulation",
   description:
     "Built a lattice Boltzmann fluid simulation with collision, streaming, boundary conditions, and obstacle interactions, visualizing the resulting flow field over time.",
