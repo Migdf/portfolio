@@ -425,6 +425,12 @@ export default function Home() {
             credentialUrl="https://www.kaggle.com/learn/certification/migdfme/intro-to-machine-learning"
           />
 
+          <CertificateItem
+            title="Pandas"
+            issuer="Kaggle"
+            date="Issued October 2026"
+            credentialUrl="https://www.kaggle.com/learn/certification/migdfme/pandas"
+          />
         </div>
 
       </section>
